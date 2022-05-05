@@ -1,0 +1,36 @@
+<form #userForm="ngForm">
+
+    {{userForm.value|json}}
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name">
+    </div>
+    <div class="mb-3">
+      <label for="college" class="form-label">College</label>
+      <input type="text" class="form-control" id="email" [(ngModel)]="user.college" name="college">
+    </div>
+    <div class="mb-3">
+      <label for="mobile" class="form-label">CGPA</label>
+      <input type="number" class="form-control" id="mobile" [(ngModel)]="user.cgpa" name="cgpa">
+    </div>
+    <div class="mb-3">
+        <label for="yearOfPassing" class="form-label">Year Of Passing</label>
+        <input type="date" class="form-control" id="mobile" [(ngModel)]="user.yearOfPassing" name="yearOfPassing">
+      </div>
+      <div class="mb-3">
+        <label for="dateOfJoining" class="form-label">Date of Joining</label>
+        <input type="date" class="form-control" id="mobile" [(ngModel)]="user.dateOfJoining" name="dateOfJoining">
+      </div>
+      <div class="mb-3">
+        <label for="skills" class="form-label">Skills (Please specify multiple skills with comma sepreted)</label>
+        <input type="text" class="form-control" id="mobile" [(ngModel)]="user.skill" name="skill">
+      </div>
+      <div class="mb-3">
+        <label for="resume" class="form-label">Upload resume</label>
+        <input type="file" class="form-control" id="resume" [(ngModel)]="user.resume" name="resume">
+      </div>
+    <button type="button" (click)="add()" class="btn btn-primary">Submit</button>
+  </form>
+
+  
+  
