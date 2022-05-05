@@ -1,36 +1,68 @@
-<form #userForm="ngForm">
-
-    {{userForm.value|json}}
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name">
-    </div>
-    <div class="mb-3">
-      <label for="college" class="form-label">College</label>
-      <input type="text" class="form-control" id="email" [(ngModel)]="user.college" name="college">
-    </div>
-    <div class="mb-3">
-      <label for="mobile" class="form-label">CGPA</label>
-      <input type="number" class="form-control" id="mobile" [(ngModel)]="user.cgpa" name="cgpa">
-    </div>
-    <div class="mb-3">
-        <label for="yearOfPassing" class="form-label">Year Of Passing</label>
-        <input type="date" class="form-control" id="mobile" [(ngModel)]="user.yearOfPassing" name="yearOfPassing">
-      </div>
-      <div class="mb-3">
-        <label for="dateOfJoining" class="form-label">Date of Joining</label>
-        <input type="date" class="form-control" id="mobile" [(ngModel)]="user.dateOfJoining" name="dateOfJoining">
-      </div>
-      <div class="mb-3">
-        <label for="skills" class="form-label">Skills (Please specify multiple skills with comma sepreted)</label>
-        <input type="text" class="form-control" id="mobile" [(ngModel)]="user.skill" name="skill">
-      </div>
-      <div class="mb-3">
-        <label for="resume" class="form-label">Upload resume</label>
-        <input type="file" class="form-control" id="resume" [(ngModel)]="user.resume" name="resume">
-      </div>
-    <button type="button" (click)="add()" class="btn btn-primary">Submit</button>
-  </form>
-
-  
-  
+<div class="container col-sm-8">
+    <form #userForm="ngForm" (submit)="add(userForm)">
+        <p class="Dispaly-2" style="text-align: center; font-size: 1.5rem;">Registration Form</p>
+        <!-- {{userForm.value|json}} -->
+        <!-- {{user|json}} -->
+        <div class="mb-3 mt-5">
+            <label for="name" class="form-label">Name</label>
+            <input required type="text" #name="ngModel" class="form-control" [ngClass]="name.invalid && name.touched?'is-invalid':''" id="name" [(ngModel)]="user.name" name="name">
+            <div *ngIf="name.invalid && name.touched" class="invalid-feedback">Please Enter valid Name </div>
+        </div>
+        <div class="mb-3">
+            <label for="college" class="form-label">College</label>
+            <input required type="text" #college="ngModel" class="form-control" [ngClass]="college.invalid && college.touched?'is-invalid':''" id="email" [(ngModel)]="user.college" name="college">
+            <div *ngIf="college.invalid && college.touched" class="invalid-feedback">Please Enter valid College</div>
+        </div>
+        <div class="mb-3">
+            <label for="mobile" class="form-label">CGPA</label>
+            <input required type="number" #cgpa="ngModel" step="0.1" class="form-control" [ngClass]="cgpa.invalid && cgpa.touched?'is-invalid':''" id="mobile" [(ngModel)]="user.cgpa" name="cgpa">
+            <div *ngIf="cgpa.invalid && cgpa.touched" class="invalid-feedback">Please Enter valid CGPA </div>
+            <div *ngIf="user.cgpa<0 || user.cgpa>10" class="invalid-feedback">CGPA must be greater then zero and smaller then 10</div>
+        </div>
+        <div class="mb-3">
+            <label for="yearOfPassing" class="form-label">Year Of Passing</label>
+            <input required type="month" #yearOfPassing="ngModel" class="form-control" [ngClass]="yearOfPassing.invalid && yearOfPassing.touched?'is-invalid':''" id="mobile" [(ngModel)]="user.yearOfPassing" name="yearOfPassing">
+            <div *ngIf="yearOfPassing.invalid && yearOfPassing.touched" class="invalid-feedback">Please Enter valid Year Of Passing </div>
+        </div>
+        <div class="mb-3">
+            <label for="dateOfJoining" class="form-label">Date of Joining</label>
+            <input required type="date" #dateOfJoining="ngModel" class="form-control" [ngClass]="dateOfJoining.invalid && dateOfJoining.touched?'is-invalid':''" id="mobile" [(ngModel)]="user.dateOfJoining" name="dateOfJoining">
+            <div *ngIf="dateOfJoining.invalid && dateOfJoining.touched" class="invalid-feedback">Please Enter valid Date of Joining </div>
+        </div>
+        <div class="mb-3">
+            <label for="skills" class="form-label">Skills (Please specify multiple skills with comma sepreted)</label>
+            <input required type="text" #skills="ngModel" class="form-control" id="mobile" [ngClass]="skills.invalid && skills.touched?'is-invalid':''" [(ngModel)]="user.skill" name="skill">
+            <div *ngIf="skills.invalid && skills.touched" class="invalid-feedback">Please Enter valid Skills </div>
+        </div>
+        <div class="mb-3">
+            <label for="resume" class="form-label">Upload resume</label>
+            <input required type="file" accept="application/pdf" #resume="ngModel" class="form-control" id="resume" [ngClass]="resume.invalid && resume.touched?'is-invalid':''" [(ngModel)]="user.resume" name="resume">
+            <div *ngIf="resume.invalid && resume.touched" class="invalid-feedback">Please upload valid resume </div>
+        </div>
+        <button type="submit" *ngIf="name.valid && college.valid && cgpa.valid && yearOfPassing.valid && dateOfJoining.valid && skills.valid &&resume.valid && user.cgpa>0" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">College</th>
+            <th scope="col">CGPA</th>
+            <th scope="col">Year Of Passing</th>
+            <th scope="col">Date Of Joining</th>
+            <th scope="col">Skills</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of userArray;index as i">
+            <th scope="row">{{i+1}}</th>
+            <td scope="rom">{{item.name}}</td>
+            <td scope="rom">{{item.college}}</td>
+            <td scope="rom">{{item.cgpa}}</td>
+            <td scope="rom">{{item.yearOfPassing|date}}</td>
+            <td scope="rom">{{item.dateOfJoining|date}}</td>
+            <td scope="rom">{{item.skill}}</td>
+        </tr>
+    </tbody>
+</table>
