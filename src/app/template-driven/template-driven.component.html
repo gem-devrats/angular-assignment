@@ -40,6 +40,7 @@
             <div *ngIf="resume.invalid && resume.touched" class="invalid-feedback">Please upload valid resume </div>
         </div>
         <button type="submit" *ngIf="name.valid && college.valid && cgpa.valid && yearOfPassing.valid && dateOfJoining.valid && skills.valid &&resume.valid && user.cgpa>0" class="btn btn-primary">Submit</button>
+        &nbsp; &nbsp; &nbsp;<button type="reset" class="btn btn-danger">Reset</button>
     </form>
 </div>
 <table class="table">

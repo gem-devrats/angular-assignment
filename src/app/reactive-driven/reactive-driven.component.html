@@ -1,1 +1,39 @@
-<p>reactive-driven works!</p>
+<div class="container col-sm-6 mt-5">
+    <div class="card mt-5">
+        <p class="Dispaly-2 mt-3" style="text-align: center; font-size: 1.5rem;">Sign Up Page</p>
+        <form class="mt-3" style="margin: 10px;" [formGroup]="sign" (submit)="add()">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" formControlName="name" [class.is-invalid]="sign.get('name')?.invalid && sign.get('name')?.touched" class="form-control" id="name">
+                <div class="invalid-feedback" *ngIf="sign.get('name')?.invalid && sign.get('name')?.touched"> Please Enter valid Name</div>
+            </div>
+            <div class="mb-3">
+                <label for="fatherName" class="form-label">Father's Name</label>
+                <input type="text" formControlName="fatherName" [class.is-invalid]="sign.get('fatherName')?.invalid && sign.get('fatherName')?.touched" class="form-control" id="fatherName">
+                <div class="invalid-feedback" *ngIf="sign.get('fatherName')?.invalid && sign.get('fatherName')?.touched"> Please Enter valid Father's Name</div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" formControlName="email" [class.is-invalid]="sign.get('email')?.invalid && sign.get('email')?.touched" class="form-control" id="email">
+                <div class="invalid-feedback" *ngIf="sign.get('email')?.invalid && sign.get('email')?.touched"> Please Enter valid email</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" formControlName="password" [class.is-invalid]="sign.get('password')?.invalid && sign.get('password')?.touched" class="form-control" id="password">
+
+                <div class="invalid-feedback"
+                    *ngIf="sign.get('password')?.errors?.['required'] && sign.get('password')?.touched"> Please Enter
+                    Password</div>
+                <div class="invalid-feedback" *ngIf="sign.get('password')?.errors?.['minlength']"> Password Must be 8
+                    character long</div>
+            </div>
+            <div class="mb-3">
+                <label for="number" class="form-label">Mobile Number</label>
+                <input type="tel" formControlName="number" [class.is-invalid]="sign.get('number')?.invalid && sign.get('number')?.touched" class="form-control" id="number">
+                <div class="invalid-feedback" *ngIf="sign.get('number')?.invalid && sign.get('number')?.touched"> Please Enter vaild number</div>
+            </div>
+            <button *ngIf="sign.get('number')?.valid && sign.get('password')?.valid && sign.get('email')?.valid && sign.get('fatherName')?.valid && sign.get('name')?.valid" type="submit" class="btn btn-primary">Submit</button> &nbsp; &nbsp;  
+            <button class="btn btn-danger" type="reset">Reset</button>
+        </form>
+    </div>
+</div>

@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="container col-sm-6 mt-5">
+    <div class="card">
+        <p class="Dispaly-2 mt-3" style="text-align: center; font-size: 1.5rem;">Login Page</p>
+        <form [formGroup]="login" class="mt-5" style="margin: 10px;">
+            <div class="mb-3">
+                <label for="userName" class="form-label">User Name</label>
+                <input type="text" [class.is-invalid]="login.get('userName')?.invalid && login.get('userName')?.touched" class="form-control" formControlName="userName"  id="userName">
+                <div class="invalid-feedback" *ngIf="login.get('userName')?.invalid && login.get('userName')?.touched"> Please Enter User Name</div>
+            </div>
+            <div class="mb-3">
+                <label for="password"  class="form-label">Password</label>
+                <input type="password" formControlName="password" [class.is-invalid]="login.get('password')?.invalid && login.get('password')?.touched" class="form-control" id="password">
+                <div class="invalid-feedback" *ngIf="login.get('password')?.errors?.['required'] && login.get('password')?.touched"> Please Enter Password</div>
+                <div class="invalid-feedback" *ngIf="login.get('password')?.errors?.['minlength']"> Password Must be 8 character long</div>
+            </div>
+            <button [disabled]="login.get('userName')?.invalid || login.get('password')?.invalid" type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>

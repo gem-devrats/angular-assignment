@@ -18,14 +18,8 @@ export class TemplateDrivenComponent implements OnInit {
   add(e:any){
     this.userArray.push(this.user)
     this.user = new User('','',0,null,null,'',null);
-    e.form.controls.name.touched = false;
     console.log(e.form.controls);
-    e.form.controls.college.touched = false;
-    e.form.controls.cgpa.touched = false;
-    e.form.controls.dateOfJoining.touched = false;
-    e.form.controls.yearOfPassing.touched = false;
-    e.form.controls.skill.touched = false;
-    e.form.controls.resume.touched = false;
+    e.reset();
   }
 
 }
