@@ -4,5 +4,5 @@ export class Person {
         public fatherName:string,
         public email:string,
         public password:string,
-        public number:Number){}
+        public number:string){}
 }

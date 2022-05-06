@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Person } from '../person';
-import { User } from '../user';
 
 @Component({
   selector: 'app-reactive-driven',
@@ -14,18 +13,25 @@ export class ReactiveDrivenComponent implements OnInit {
 
   userArray :Person[] = [];
 
+  validateEmail(emails:any){
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/.test(emails.value) ? null : emails;
+  }
+
+  validateNumber(numbers:any){
+    return /^\d{10}$/.test(numbers.value) ? null : numbers
+  }
+
   sign = this.fb.group({
     name:['',Validators.required],
     fatherName:['',Validators.required],
-    email:['',Validators.required],
+    email:['',[Validators.required,this.validateEmail]],
     password:['',[Validators.required,Validators.minLength(8)]],
-    number:['',Validators.required]
+    number:['',[Validators.required,this.validateNumber]]
   })
-  person:Person = new Person('','','','',0);
+  person:Person = new Person('','','','','');
 
   add(e:any){
     this.person  = new Person(e.value.name,e.value.fatherName,e.value.email,e.value.password,e.value.number)
-    console.log(e.value)
     this.userArray.push(this.person);
     this.sign.reset();
   }

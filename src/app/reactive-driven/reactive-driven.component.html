@@ -45,7 +45,8 @@
                 <input type="tel" formControlName="number"
                     [class.is-invalid]="sign.get('number')?.invalid && sign.get('number')?.touched" class="form-control"
                     id="number">
-                <div class="invalid-feedback" *ngIf="sign.get('number')?.invalid && sign.get('number')?.touched"> Please
+                <div class="invalid-feedback"
+                    *ngIf="sign.get('number')?.invalid && sign.get('number')?.touched"> Please
                     Enter vaild number</div>
             </div>
             <div class="container text-center">
