@@ -9,9 +9,11 @@ import { Person } from '../person';
 })
 export class ReactiveDrivenComponent implements OnInit {
 
-  constructor(private fb : FormBuilder) { }
+  constructor(private fb : FormBuilder) {
+    localStorage.setItem('arr','[]')
+   }
 
-  userArray :Person[] = [];
+  userArray :Person[] = JSON.parse(localStorage.getItem('arr1') || '[]');
 
   validateEmail(emails:any){
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+/.test(emails.value) ? null : emails;
@@ -33,6 +35,7 @@ export class ReactiveDrivenComponent implements OnInit {
   add(e:any){
     this.person  = new Person(e.value.name,e.value.fatherName,e.value.email,e.value.password,e.value.number)
     this.userArray.push(this.person);
+    localStorage.setItem('arr1',JSON.stringify(this.userArray))
     this.sign.reset();
   }
 

@@ -1,7 +1,7 @@
-<div class="container col-sm-6 mt-5">
+<div *ngIf="!flag" class="container col-sm-6 mt-5">
     <div class="card">
         <p class="Dispaly-2 mt-3" style="text-align: center; font-size: 1.5rem;">Login Page</p>
-        <form [formGroup]="login" class="mt-5" style="margin: 10px;">
+        <form [formGroup]="login" class="mt-5" style="margin: 10px;" (submit)="one()">
             <div class="mb-3">
                 <label for="userName" class="form-label">User Name</label>
                 <input type="text" [class.is-invalid]="login.get('userName')?.invalid && login.get('userName')?.touched"
@@ -27,3 +27,5 @@
         </form>
     </div>
 </div>
+
+<h1 *ngIf="flag" style="text-align: center;">Login Succesfull</h1>

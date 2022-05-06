@@ -11,14 +11,14 @@ export class TemplateDrivenComponent implements OnInit {
   constructor() { }
 
   user:User = new User('','',0,null,null,'',null);
-  userArray:User[] = [];
+  userArray:User[] = JSON.parse(localStorage.getItem('arr2') || '[]');
   ngOnInit(): void {
   }
 
   add(e:any){
     this.userArray.push(this.user)
     this.user = new User('','',0,null,null,'',null);
-    console.log(e.form.controls);
+    localStorage.setItem('arr2',JSON.stringify(this.userArray))
     e.reset();
   }
 
