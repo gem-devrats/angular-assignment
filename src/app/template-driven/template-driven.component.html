@@ -15,7 +15,7 @@
         </div>
         <div class="mb-3">
             <label for="mobile" class="form-label">CGPA</label>
-            <input required type="number" #cgpa="ngModel" step="0.1" class="form-control" [ngClass]="cgpa.invalid && cgpa.touched?'is-invalid':''" id="mobile" [(ngModel)]="user.cgpa" name="cgpa">
+            <input required type="number" #cgpa="ngModel" step="0.1" class="form-control" [ngClass]="cgpa.invalid && cgpa.touched || !(user.cgpa>=0 && user.cgpa<10)?'is-invalid':''" id="mobile" [(ngModel)]="user.cgpa" name="cgpa">
             <div *ngIf="cgpa.invalid && cgpa.touched" class="invalid-feedback">Please Enter valid CGPA </div>
             <div *ngIf="user.cgpa<0 || user.cgpa>10" class="invalid-feedback">CGPA must be greater then zero and smaller then 10</div>
         </div>
@@ -39,8 +39,10 @@
             <input required type="file" accept="application/pdf" #resume="ngModel" class="form-control" id="resume" [ngClass]="resume.invalid && resume.touched?'is-invalid':''" [(ngModel)]="user.resume" name="resume">
             <div *ngIf="resume.invalid && resume.touched" class="invalid-feedback">Please upload valid resume </div>
         </div>
-        <button type="submit" *ngIf="name.valid && college.valid && cgpa.valid && yearOfPassing.valid && dateOfJoining.valid && skills.valid &&resume.valid && user.cgpa>0" class="btn btn-primary">Submit</button>
+        <div class="text-center container">
+        <button type="submit" *ngIf="name.valid && college.valid && cgpa.valid && yearOfPassing.valid && dateOfJoining.valid && skills.valid &&resume.valid && user.cgpa>=0 && user.cgpa<10" class="btn btn-primary">Add Row</button>
         &nbsp; &nbsp; &nbsp;<button type="reset" class="btn btn-danger">Reset</button>
+    </div>
     </form>
 </div>
 <table class="table">

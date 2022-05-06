@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Person } from '../person';
 import { User } from '../user';
 
 @Component({
@@ -11,7 +12,7 @@ export class ReactiveDrivenComponent implements OnInit {
 
   constructor(private fb : FormBuilder) { }
 
-  userArray :User[] = [];
+  userArray :Person[] = [];
 
   sign = this.fb.group({
     name:['',Validators.required],
@@ -20,10 +21,13 @@ export class ReactiveDrivenComponent implements OnInit {
     password:['',[Validators.required,Validators.minLength(8)]],
     number:['',Validators.required]
   })
+  person:Person = new Person('','','','',0);
 
-
-  add(){
-    console.log(this.sign)
+  add(e:any){
+    this.person  = new Person(e.value.name,e.value.fatherName,e.value.email,e.value.password,e.value.number)
+    console.log(e.value)
+    this.userArray.push(this.person);
+    this.sign.reset();
   }
 
 
